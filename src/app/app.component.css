@@ -1,0 +1,30 @@
+.main-container {
+    display: grid;
+    grid-template-rows: 60px 800px 1fr;
+    grid-template-columns: 1fr 500px 500px 500px 1fr;
+}
+
+.toolbar-component {
+    grid-column: 1 / 6;
+    grid-row: 1 / 2; 
+    background-color: red;
+}
+.controls-component {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;  
+    background-color: blue;
+}
+.canvas-component {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3; 
+    background-color: yellow;
+}
+
+.chatbox-component {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3; 
+    background-color: green;
+    display: grid;
+    grid-template-rows: 1fr 30px;
+    grid-template-columns: 1fr;
+}

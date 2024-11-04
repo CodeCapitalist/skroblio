@@ -1,0 +1,9 @@
+<div class="message-log">
+    @for(message of chatService.messages(); track message) {
+    <app-chat-box-message [message]="message"></app-chat-box-message>
+    }
+</div>
+<div class="message-prompt">
+    Message: <input type="text" [(ngModel)]="messagePrompt">
+    <button (click)="sendMessage()" class="send-message-btn">Send</button>
+</div>
