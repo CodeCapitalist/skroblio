@@ -1,17 +1,19 @@
 .main-container {
     display: grid;
-    grid-template-rows: 60px 800px 1fr;
-    grid-template-columns: 1fr 500px 500px 500px 1fr;
+    grid-template-rows: 90px 700px 180px 1fr;
+    grid-template-columns: 1fr 200px 700px 300px 1fr;
+    gap: 10px;
+    background-color: blue;
 }
 
 .toolbar-component {
-    grid-column: 1 / 6;
+    grid-column: 2 / 5;
     grid-row: 1 / 2; 
     background-color: red;
 }
 .controls-component {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;  
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;  
     background-color: blue;
 }
 .canvas-component {
@@ -23,8 +25,18 @@
 .chatbox-component {
     grid-column: 4 / 5;
     grid-row: 2 / 3; 
-    background-color: green;
     display: grid;
     grid-template-rows: 1fr 30px;
     grid-template-columns: 1fr;
+    background-color: antiquewhite;
+    border-radius: 3px;
+    padding-bottom: 5px;
+}
+
+.scoreboard-component {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }

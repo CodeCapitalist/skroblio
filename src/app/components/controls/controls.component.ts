@@ -23,4 +23,12 @@ export class ControlsComponent {
   public setBrushColor(color: string){
     
   }
+
+  public useFloodFill(){
+    this.drawingService.useFloodFill();
+  }
+  
+  public useBrush(){
+    this.drawingService.useBrush();
+  }
 }
