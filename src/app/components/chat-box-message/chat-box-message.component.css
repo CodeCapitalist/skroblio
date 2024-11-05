@@ -2,3 +2,13 @@
     height: 30px;
     width: 100%;
 }
+
+p {
+    display: inline;
+    margin: 0;
+}
+
+b {
+    display: inline;
+    margin: 0;
+}

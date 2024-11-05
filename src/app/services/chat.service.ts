@@ -9,6 +9,6 @@ export class ChatService {
   constructor() { }
 
   public addMessage(message: ChatBoxMessage){
-    this.messages.update(messages => [...messages, message]);
+    this.messages.update(messages => [message, ...messages]);
   }
 }

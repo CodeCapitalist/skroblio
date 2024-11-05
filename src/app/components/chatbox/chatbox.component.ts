@@ -19,5 +19,6 @@ export class ChatboxComponent {
 
   public sendMessage(){
     this.chatService.addMessage(new ChatBoxMessage(this.messagePrompt, "userMessage", new Date(Date.now()), "Me"));
+    this.messagePrompt = "";
   }
 }

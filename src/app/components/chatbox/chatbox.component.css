@@ -2,3 +2,29 @@
     height: 25px;
     width: 80px;
 }
+
+.message-prompt-container {
+    grid-row: 2 / 3;
+    display: block;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.message-log{
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+}
+
+.message-prompt {
+    border-radius: 2px;
+    border-width: 1px;
+    border-style:groove;
+    border-color: black;
+    background-color: azure;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%
+}

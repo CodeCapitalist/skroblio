@@ -3,7 +3,7 @@
     <app-chat-box-message [message]="message"></app-chat-box-message>
     }
 </div>
-<div class="message-prompt">
-    Message: <input type="text" [(ngModel)]="messagePrompt">
-    <button (click)="sendMessage()" class="send-message-btn">Send</button>
-</div>
+<span class="message-prompt-container">
+    <input type="text" class="message-prompt" placeholder="Type your guess here..." [(ngModel)]="messagePrompt" (keydown.enter)="sendMessage()">
+</span>
+
