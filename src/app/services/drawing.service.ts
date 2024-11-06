@@ -1,4 +1,5 @@
 import { ElementRef, Injectable, Renderer2, RendererFactory2, signal, Signal } from '@angular/core';
+import { BucketFiller } from '../helpers/bucket-filler';
 
 @Injectable({
   providedIn: 'root'
@@ -208,64 +209,13 @@ export class DrawingService {
   
   public floodFill(event: MouseEvent){  
     if(this.context != null){
-      let grid = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
-      let targetColor = this.getPixelColor(grid, event.offsetX, event.offsetY);
-      this.context.fillStyle = this.colour;
-      this.floodFillRecursive(grid, event.offsetX, event.offsetY, targetColor)
+      let bucketFiller: BucketFiller = new BucketFiller(this.canvas, this.context, this.colour)
     }   
   }
-  public floodFillRecursive(grid: ImageData, x: number, y: number, targetColor: Uint8ClampedArray){
-    var pixelStack = [[x,y]];
-    while(pixelStack.length > 0){
-      let position = pixelStack.pop()!;
-      // console.log(`pop: ${position}`)
-      let y = position[1];
-      let x = position[0];
-      let gridIndex = this.positionToGridIndex(position);
-      while(y-- >= 0 && this.compareColors(this.getPixelColorAtGridIndex(grid, gridIndex), targetColor)){
-        gridIndex = this.moveGridYPosition(gridIndex, -1);
-      }
-      gridIndex = this.moveGridYPosition(gridIndex, 1);
-      ++y;
-      let reachLeft = false;
-      let reachRight = false;
-      while(y++ < this.canvas.height - 1 && this.compareColors(this.getPixelColorAtGridIndex(grid,gridIndex), targetColor)){
-        console.log(`color: [${x},${y}]`);
-        this.colorPixel(x,y);
-        //look left
-        if(x > 0){
-          if(this.compareColors(this.getPixelColorAtGridIndex(grid, this.moveGridXPosition(gridIndex, -1)), targetColor)){
-            if(!reachLeft){
-              // console.log(`push: [${x-1},${y}]`);
-              pixelStack.push([x-1,y]);
-              reachLeft = true;
-            }
-          }
-          else if(reachLeft){
-            reachLeft = false;
-          }
-        }
-        //look right
-        if(x < this.canvas.width - 1){
-          if(this.compareColors(this.getPixelColorAtGridIndex(grid, this.moveGridXPosition(gridIndex, 1)), targetColor)){
-            if(!reachRight){
-              // console.log(`push: [${x+1},${y}]`);
-              pixelStack.push([x+1,y]);
-              reachRight = true;
-            }
-          }
-          else if(reachRight){
-            reachRight = false;
-          }
-        }
-        gridIndex = this.moveGridYPosition(gridIndex, 1);
-      }
-    }
-  }
 
 
 
-  
+
   public colorPixel(x: number, y: number){
     this.context?.fillRect(x, y, 1, 1);
   }
@@ -275,52 +225,4 @@ export class DrawingService {
     return grid.data.slice(offset, offset + 4);
   }
 
-  private getPixelColorAtGridIndex(grid: ImageData, gridIndex: number): Uint8ClampedArray {
-    return grid.data.slice(gridIndex, gridIndex+4);
-  }
-
-  private positionToGridIndex(position: number[] | undefined){
-    if(position){
-      return (position[1] * 4 * this.canvas.width) + (4 * position[0]);
-    }
-    console.error('Invalid position!');
-    return -1;
-  }
-
-  private moveGridXPosition(position: number, xScalar: number): number {
-    return position + (xScalar*4);
-  }
-
-  private moveGridYPosition(position: number, yScalar: number): number {
-    return position + (yScalar * this.canvas.width * 4);
-  }
-
-  private compareColors(color0: Uint8ClampedArray, color1: Uint8ClampedArray){
-    if(color0[0] !== color1[0]) return false;
-    if(color0[1] !== color1[1]) return false;
-    if(color0[2] !== color1[2]) return false;
-    if(color0[3] !== color1[3]) return false;
-    return true;
-  }
-
-  private hexToRgba(hex: string, alpha: number = 1): Uint8ClampedArray {
-    // Remove the # if it exists
-    hex = hex.replace("#", "");
-  
-    // Check if it's a 3-digit hex color
-    if (hex.length === 3) {
-      hex = hex
-        .split("")
-        .map((char) => char + char)
-        .join("");
-    }
-  
-    // Parse the hex values
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-  
-    // Return the rgba string
-    return new Uint8ClampedArray([r,g,b,255]);
-  }
 }
