@@ -1,7 +1,7 @@
 .main-container {
     display: grid;
-    grid-template-rows: 90px 700px 180px 1fr;
-    grid-template-columns: 1fr 200px 700px 300px 1fr;
+    grid-template-rows: 90px 200px 180px 1fr;
+    grid-template-columns: 1fr 100px 700px 300px 1fr;
     gap: 10px;
     background-color: blue;
 }

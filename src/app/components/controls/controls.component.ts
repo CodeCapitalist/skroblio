@@ -31,4 +31,8 @@ export class ControlsComponent {
   public useBrush(){
     this.drawingService.useBrush();
   }
+
+  public printCanvas(){
+    this.drawingService.printCanvas();
+  }
 }
