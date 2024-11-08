@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DrawingService } from '../../services/drawing.service';
+import { WebSocketService } from '../../services/web-socket.service';
 
 @Component({
   selector: 'app-controls',
@@ -10,7 +11,9 @@ import { DrawingService } from '../../services/drawing.service';
 })
 export class ControlsComponent {
 
-  constructor(private drawingService: DrawingService){ }
+  constructor(private drawingService: DrawingService, private webSocketService: WebSocketService){
+
+  }
 
   public clearCanvas(){
     this.drawingService.ClearCanvas();
@@ -34,5 +37,9 @@ export class ControlsComponent {
 
   public printCanvas(){
     this.drawingService.printCanvas();
+  }
+
+  public sendMessage(){
+    this.webSocketService.sendMessage("yurrrr");
   }
 }
